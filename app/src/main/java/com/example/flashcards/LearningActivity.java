@@ -1,0 +1,124 @@
+package com.example.flashcards; // Upewnij się, że to nazwa Twojego pakietu
+
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import java.util.List;
+
+public class LearningActivity extends AppCompatActivity {
+
+    private TextView progressTextView, frontTextView, backTextView;
+    private Button previousButton, nextButton;
+    private FrameLayout cardContainer;
+    private CardView cardFront, cardBack;
+
+    private List<Flashcard> currentCards;
+    private int currentCardIndex = 0;
+    private boolean isFrontVisible = true;
+
+    private AnimatorSet frontAnim;
+    private AnimatorSet backAnim;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_learning);
+
+        progressTextView = findViewById(R.id.textViewProgress);
+        frontTextView = findViewById(R.id.textViewFront);
+        backTextView = findViewById(R.id.textViewBack);
+        previousButton = findViewById(R.id.buttonPrevious);
+        nextButton = findViewById(R.id.buttonNext);
+        cardContainer = findViewById(R.id.cardContainer);
+        cardFront = findViewById(R.id.cardFront);
+        cardBack = findViewById(R.id.cardBack);
+
+        int deckIndex = getIntent().getIntExtra("DECK_INDEX", -1);
+        if (deckIndex == -1 || deckIndex >= MainActivity.deckList.size()) {
+            Toast.makeText(this, "Błąd: Nie znaleziono zestawu.", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        currentCards = MainActivity.deckList.get(deckIndex).getCards();
+        if (currentCards == null || currentCards.isEmpty()) {
+            Toast.makeText(this, "Ten zestaw nie ma żadnych fiszek!", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        loadAnimations();
+        setupClickListeners();
+        showCurrentCard();
+    }
+
+    private void loadAnimations() {
+        float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+        cardFront.setCameraDistance(8000 * scale);
+        cardBack.setCameraDistance(8000 * scale);
+        frontAnim = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.front_animator);
+        backAnim = (AnimatorSet) AnimatorInflater.loadAnimator(getApplicationContext(), R.animator.back_animator);
+    }
+
+    private void setupClickListeners() {
+        cardContainer.setOnClickListener(v -> flipCard());
+        nextButton.setOnClickListener(v -> {
+            if (currentCardIndex < currentCards.size() - 1) {
+                currentCardIndex++;
+                showCurrentCard();
+            }
+        });
+        previousButton.setOnClickListener(v -> {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+                showCurrentCard();
+            }
+        });
+    }
+
+    private void showCurrentCard() {
+        // --- POPRAWKA JEST TUTAJ ---
+        // Resetujemy widok do stanu początkowego przy każdej nowej karcie
+        isFrontVisible = true;
+        cardFront.setRotationY(0); // Resetujemy obrót, jeśli był zmieniony
+        cardBack.setRotationY(-180); // Resetujemy obrót
+        cardFront.setVisibility(View.VISIBLE);
+        cardBack.setVisibility(View.GONE);
+
+        Flashcard card = currentCards.get(currentCardIndex);
+        frontTextView.setText(card.getFront());
+        backTextView.setText(card.getBack());
+        progressTextView.setText((currentCardIndex + 1) + "/" + currentCards.size());
+
+        previousButton.setVisibility(currentCardIndex == 0 ? View.INVISIBLE : View.VISIBLE);
+        nextButton.setVisibility(currentCardIndex == currentCards.size() - 1 ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    private void flipCard() {
+        // --- POPRAWKA JEST TUTAJ ---
+        if (isFrontVisible) {
+            frontAnim.setTarget(cardFront);
+            backAnim.setTarget(cardBack);
+            // Ustawiamy rewers jako widoczny, ZANIM animacja go odsłoni
+            cardBack.setVisibility(View.VISIBLE);
+            frontAnim.start();
+            backAnim.start();
+            isFrontVisible = false;
+        } else {
+            // Przy powrocie animacja sama chowa/pokazuje widoki przez alpha,
+            // a metoda showCurrentCard() zresetuje wszystko dla nowej karty.
+            frontAnim.setTarget(cardBack);
+            backAnim.setTarget(cardFront);
+            backAnim.start();
+            frontAnim.start();
+            isFrontVisible = true;
+        }
+    }
+}
