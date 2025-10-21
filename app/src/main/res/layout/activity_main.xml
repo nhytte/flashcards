@@ -20,13 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
-
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
         tools:listitem="@layout/item_deck" />
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddDeck"
+        android:id="@+id/fab_add_deck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

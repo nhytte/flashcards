@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="?attr/colorSurface"
+    app:cardElevation="1dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/buttonAddFromLibrary"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewLibraryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Matematyka"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorOnSurface"/>
+
+            <TextView
+                android:id="@+id/textViewLibraryDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wzory algebry i geometrii"
+                android:textColor="?attr/colorOnSurfaceVariant"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textViewLibraryCardCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12 kart"
+            android:textStyle="bold"
+            android:layout_above="@id/buttonAddFromLibrary"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="8dp"
+            android:textColor="?attr/colorOnSurface"/>
+
+        <Button
+            android:id="@+id/buttonAddFromLibrary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:text="Dodaj"/>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
