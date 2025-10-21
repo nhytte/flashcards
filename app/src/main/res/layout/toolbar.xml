@@ -1,57 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.appbar.MaterialToolbar
+<androidx.appcompat.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@drawable/toolbar_gradient"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp"
-    app:contentInsetStart="0dp"
-    app:contentInsetEnd="0dp">
+    android:elevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ImageView
+            android:id="@+id/toolbar_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_arrow_back"
+            android:visibility="gone"
+            app:tint="@android:color/white"
+            android:contentDescription="Wstecz"/>
+
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/toolbar_back_arrow"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/toolbar_logo"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/logo_fiszki"
-                android:contentDescription="Logo aplikacji" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/logo"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="Logo aplikacji"/>
 
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:text="FlashCards"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/toolbar_back_arrow"
+
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_arrow_back"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Wróć"
-            android:visibility="gone"
-            app:tint="@android:color/white" />
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true">
+
+
+            <ImageView
+                android:id="@+id/icon_google_login"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_google"
+                app:tint="@android:color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="visible"
+                android:contentDescription="Zaloguj się przez Google"/>
+
+
+            <ImageView
+                android:id="@+id/icon_profile"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_person"
+                app:tint="@android:color/white"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone"
+                android:contentDescription="Profil użytkownika"/>
+
+        </FrameLayout>
 
     </RelativeLayout>
-
-</com.google.android.material.appbar.MaterialToolbar>
+</androidx.appcompat.widget.Toolbar>
