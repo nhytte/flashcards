@@ -5,62 +5,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".LearningActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar_layout" />
+
     <TextView
         android:id="@+id/textViewProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/toolbar_layout"
         android:layout_centerHorizontal="true"
         android:text="1/20"
-        android:textSize="20sp" />
-
-    <FrameLayout
-        android:id="@+id/cardContainer"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_centerInParent="true">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardFront"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textViewFront"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Hola"
-                android:textSize="48sp" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardBack"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            app:cardBackgroundColor="#673AB7"> <TextView
-            android:id="@+id/textViewBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Witam"
-            android:textColor="@android:color/white"
-            android:textSize="48sp" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </FrameLayout>
-
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"/>
 
     <LinearLayout
+        android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <Button
             android:id="@+id/buttonPrevious"
@@ -81,4 +47,45 @@
             android:text="Następny"/>
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/cardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/textViewProgress"
+        android:layout_above="@id/buttonLayout"
+        android:layout_margin="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardFront"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewFront"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Hola"
+                android:textSize="48sp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:cardBackgroundColor="#673AB7">
+
+            <TextView
+                android:id="@+id/textViewBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Witam"
+                android:textColor="@android:color/white"
+                android:textSize="48sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </FrameLayout>
 </RelativeLayout>

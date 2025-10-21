@@ -1,7 +1,9 @@
-package com.example.flashcards; // <-- ZMIEŃ NA NAZWĘ SWOJEGO PAKIETU
+package com.example.flashcards; // Upewnij się, że to nazwa Twojego pakietu
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +25,21 @@ public class CreateDeckActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_deck);
+
+        // --- POCZĄTEK KODU DLA TOOLBARA ---
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        // Znajdujemy nasz niestandardowy przycisk i go włączamy
+        ImageView backArrow = findViewById(R.id.toolbar_back_arrow);
+        backArrow.setVisibility(View.VISIBLE);
+        backArrow.setOnClickListener(v -> onBackPressed()); // Ustawiamy akcję cofania
+        // --- KONIEC KODU DLA TOOLBARA ---
+
 
         titleEditText = findViewById(R.id.editTextTitle);
         descriptionEditText = findViewById(R.id.editTextDescription);
@@ -74,10 +91,12 @@ public class CreateDeckActivity extends AppCompatActivity {
             return;
         }
 
-        Deck newDeck = new Deck(title, description, new ArrayList<>(newCardsList)); // Tworzymy kopię listy
+        Deck newDeck = new Deck(title, description, new ArrayList<>(newCardsList));
         MainActivity.deckList.add(newDeck);
 
         Toast.makeText(this, "Zestaw zapisany!", Toast.LENGTH_SHORT).show();
-        finish(); // Zamyka aktywność i wraca do MainActivity
+        finish();
     }
+
+    // NIE POTRZEBUJEMY JUŻ onSupportNavigateUp()
 }

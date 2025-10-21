@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,20 @@ public class LearningActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learning);
+
+        // --- POCZĄTEK KODU DLA TOOLBARA ---
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        // Znajdujemy nasz niestandardowy przycisk i go włączamy
+        ImageView backArrow = findViewById(R.id.toolbar_back_arrow);
+        backArrow.setVisibility(View.VISIBLE);
+        backArrow.setOnClickListener(v -> onBackPressed()); // Ustawiamy akcję cofania
+        // --- KONIEC KODU DLA TOOLBARA ---
 
         progressTextView = findViewById(R.id.textViewProgress);
         frontTextView = findViewById(R.id.textViewFront);
@@ -84,11 +99,9 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     private void showCurrentCard() {
-        // --- POPRAWKA JEST TUTAJ ---
-        // Resetujemy widok do stanu początkowego przy każdej nowej karcie
         isFrontVisible = true;
-        cardFront.setRotationY(0); // Resetujemy obrót, jeśli był zmieniony
-        cardBack.setRotationY(-180); // Resetujemy obrót
+        cardFront.setRotationY(0);
+        cardBack.setRotationY(-180);
         cardFront.setVisibility(View.VISIBLE);
         cardBack.setVisibility(View.GONE);
 
@@ -102,18 +115,14 @@ public class LearningActivity extends AppCompatActivity {
     }
 
     private void flipCard() {
-        // --- POPRAWKA JEST TUTAJ ---
         if (isFrontVisible) {
             frontAnim.setTarget(cardFront);
             backAnim.setTarget(cardBack);
-            // Ustawiamy rewers jako widoczny, ZANIM animacja go odsłoni
             cardBack.setVisibility(View.VISIBLE);
             frontAnim.start();
             backAnim.start();
             isFrontVisible = false;
         } else {
-            // Przy powrocie animacja sama chowa/pokazuje widoki przez alpha,
-            // a metoda showCurrentCard() zresetuje wszystko dla nowej karty.
             frontAnim.setTarget(cardBack);
             backAnim.setTarget(cardFront);
             backAnim.start();
@@ -121,4 +130,6 @@ public class LearningActivity extends AppCompatActivity {
             isFrontVisible = true;
         }
     }
+
+    // NIE POTRZEBUJEMY JUŻ onSupportNavigateUp()
 }

@@ -1,4 +1,4 @@
-package com.example.flashcards; // <-- UPEWNIJ SIĘ, ŻE TO NAZWA TWOJEGO PAKIETU
+package com.example.flashcards; // Upewnij się, że to nazwa Twojego pakietu
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +20,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // --- POCZĄTEK KODU DLA SPLASH SCREEN ---
+        // Ta linia MUSI być przed super.onCreate() i setContentView()
+        // --- KONIEC KODU DLA SPLASH SCREEN ---
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // --- POCZĄTEK KODU DLA TOOLBARA ---
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Wyłączamy domyślny tytuł, bo mamy własny w XML
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+        // (Nasz niestandardowy przycisk 'toolbar_back_arrow' jest już ukryty)
+        // --- KONIEC KODU DLA TOOLBARA ---
 
         if (deckList.isEmpty()) {
             addSampleData();
@@ -44,17 +61,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Ta metoda jest już zaktualizowana i zawiera logikę
-     * przechodzenia do LearningActivity.
-     */
     private void setupRecyclerView() {
         DeckAdapter.OnDeckClickListener listener = new DeckAdapter.OnDeckClickListener() {
             @Override
             public void onPracticeClick(int position) {
-                // TUTAJ JEST ZAIMPLEMENTOWANA ZMIANA
                 Intent intent = new Intent(MainActivity.this, LearningActivity.class);
-                intent.putExtra("DECK_INDEX", position); // Przekazujemy pozycję klikniętego zestawu
+                intent.putExtra("DECK_INDEX", position);
                 startActivity(intent);
             }
 

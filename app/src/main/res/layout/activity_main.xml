@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include layout="@layout/toolbar" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -19,7 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
         tools:listitem="@layout/item_deck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,4 +33,5 @@
         android:layout_margin="16dp"
         android:contentDescription="Dodaj nowy zestaw"
         app:srcCompat="@android:drawable/ic_input_add" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
