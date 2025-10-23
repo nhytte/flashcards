@@ -20,7 +20,7 @@ public interface ApiService {
             "Content-Type: application/json",
             "Prefer: resolution=merge-duplicates"
     })
-    @POST("rest/v1/Users")
+    @POST("rest/v1/users")
     Call<Void> upsertUser(
             @Body UserData user,
             @Header("apikey") String apiKey,
