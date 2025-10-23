@@ -52,6 +52,15 @@ public class CreateDeckActivity extends AppCompatActivity {
         ImageView backArrow = findViewById(R.id.toolbar_back_arrow);
         backArrow.setVisibility(View.VISIBLE);
         backArrow.setOnClickListener(v -> onBackPressed());
+
+        ImageView iconGoogleLogin = findViewById(R.id.icon_google_login);
+        ImageView iconProfile = findViewById(R.id.icon_profile);
+        if (iconGoogleLogin != null) {
+            iconGoogleLogin.setVisibility(View.GONE);
+        }
+        if (iconProfile != null) {
+            iconProfile.setVisibility(View.GONE);
+        }
         // --- KONIEC KODU DLA TOOLBARA ---
 
         titleEditText = findViewById(R.id.editTextTitle);

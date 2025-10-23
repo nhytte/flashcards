@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="?attr/colorSurface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Słownictwo hiszpańskie"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="?attr/colorOnSurface"/>
 
         <TextView
             android:id="@+id/textViewDeckDescription"
@@ -27,15 +29,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Podstawowe hiszpańskie słowa i zwroty"
-            android:textAppearance="?attr/textAppearanceBody2" />
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?attr/colorOnSurfaceVariant"/>
 
         <TextView
             android:id="@+id/textViewCardCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="24 kart"
-            android:textStyle="bold" />
+            android:text="0 kart"
+            android:textStyle="bold"
+            android:textColor="?attr/colorOnSurface"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,11 +49,14 @@
 
             <Button
                 android:id="@+id/buttonDelete"
-                style="?attr/materialButtonOutlinedStyle"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Usuń" />
+                android:text="Usuń"
+                app:backgroundTint="?attr/colorError"
+                android:textColor="?attr/colorOnError"
+                app:cornerRadius="20dp" />
 
             <View
                 android:layout_width="16dp"
@@ -57,10 +64,13 @@
 
             <Button
                 android:id="@+id/buttonPractice"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ćwicz" />
+                android:text="Ćwicz"
+                app:cornerRadius="20dp"/>
+
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

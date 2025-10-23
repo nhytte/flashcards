@@ -69,7 +69,7 @@
                 android:layout_height="32dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_google"
-                app:tint="@android:color/white"
+
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="visible"

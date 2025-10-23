@@ -38,11 +38,19 @@ public class AddDeckActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+
         ImageView backArrow = findViewById(R.id.toolbar_back_arrow);
         backArrow.setVisibility(View.VISIBLE);
         backArrow.setOnClickListener(v -> onBackPressed());
         // --- Koniec Paska Narzędzi ---
-
+        ImageView iconGoogleLogin = findViewById(R.id.icon_google_login);
+        ImageView iconProfile = findViewById(R.id.icon_profile);
+        if (iconGoogleLogin != null) {
+            iconGoogleLogin.setVisibility(View.GONE);
+        }
+        if (iconProfile != null) {
+            iconProfile.setVisibility(View.GONE);
+        }
         // Znajdź widoki
         recyclerViewLibrary = findViewById(R.id.recyclerViewLibrary);
         Button buttonCreate = findViewById(R.id.buttonCreate);
@@ -120,19 +128,51 @@ public class AddDeckActivity extends AppCompatActivity {
 
     // Funkcja ładująca przykładowe zestawy do biblioteki
     private void loadLibraryDecks() {
-        // Użyj RZECZYWISTYCH ID z tabeli 'decks' w Supabase
+        libraryDeckList.clear(); // Wyczyść listę przed dodaniem nowych
+
+        // Użyj RZECZYWISTYCH ID z tabeli 'decks' w Supabase (załóżmy, że to 1 i 2)
+
+        // --- Stare talie ---
         List<Flashcard> mathCards = new ArrayList<>();
         mathCards.add(new Flashcard("a² + b² = ?", "c²"));
-        Deck mathDeck = new Deck("Matematyka", "Wzory...", mathCards);
-        mathDeck.setDbId(2); // <-- ZASTĄP RZECZYWISTYM ID
+        Deck mathDeck = new Deck("Matematyka", "Wzory algebry i geometrii", mathCards);
+        mathDeck.setDbId(1); // Zakładane ID
         libraryDeckList.add(mathDeck);
 
         List<Flashcard> geographyCards = new ArrayList<>();
         geographyCards.add(new Flashcard("Stolica Francji", "Paryż"));
-        Deck geoDeck = new Deck("Geografia", "Stolice...", geographyCards);
-        geoDeck.setDbId(1); // <-- ZASTĄP RZECZYWISTYM ID
+        Deck geoDeck = new Deck("Geografia", "Stolice i góry", geographyCards);
+        geoDeck.setDbId(2); // Zakładane ID
         libraryDeckList.add(geoDeck);
 
+        // --- NOWE TALIE Z NOWYMI ID ---
+
+        // Historia Polski (ID = 100)
+        Deck historyDeck = new Deck("Historia Polski", "Ważne daty i wydarzenia", new ArrayList<>());
+        historyDeck.setDbId(100);
+        libraryDeckList.add(historyDeck);
+
+        // Podstawy Biologii (ID = 101)
+        Deck biologyDeck = new Deck("Podstawy Biologii", "Komórki, genetyka i ewolucja", new ArrayList<>());
+        biologyDeck.setDbId(101);
+        libraryDeckList.add(biologyDeck);
+
+        // Angielski - Słówka B1 (ID = 102)
+        Deck englishDeck = new Deck("Angielski - Słówka B1", "Przydatne słownictwo na poziomie B1", new ArrayList<>());
+        englishDeck.setDbId(102);
+        libraryDeckList.add(englishDeck);
+
+        // Podstawy Programowania (ID = 103)
+        Deck programmingDeck = new Deck("Podstawy Programowania", "Kluczowe koncepcje i definicje", new ArrayList<>());
+        programmingDeck.setDbId(103);
+        libraryDeckList.add(programmingDeck);
+
+        // Polskie Idiomy (ID = 104)
+        Deck idiomsDeck = new Deck("Polskie Idiomy", "Popularne zwroty i ich znaczenie", new ArrayList<>());
+        idiomsDeck.setDbId(104);
+        libraryDeckList.add(idiomsDeck);
+
+        // Powiadom adapter o zmianach
         if (adapter != null) adapter.notifyDataSetChanged();
     }
 }
