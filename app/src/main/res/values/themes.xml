@@ -1,8 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="Base.Theme.Flashcards" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="Theme.Flashcards" parent="Base.Theme.Flashcards" />
+
     <style name="Theme.Flashcards.Splash" parent="Theme.Flashcards">
         <item name="android:windowBackground">@drawable/splash_drawable</item>
     </style>

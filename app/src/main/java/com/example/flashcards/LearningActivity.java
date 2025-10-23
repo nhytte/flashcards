@@ -44,6 +44,15 @@ public class LearningActivity extends AppCompatActivity {
         ImageView backArrow = findViewById(R.id.toolbar_back_arrow);
         backArrow.setVisibility(View.VISIBLE);
         backArrow.setOnClickListener(v -> onBackPressed()); // Ustawiamy akcję cofania
+
+        ImageView iconGoogleLogin = findViewById(R.id.icon_google_login);
+        ImageView iconProfile = findViewById(R.id.icon_profile);
+        if (iconGoogleLogin != null) {
+            iconGoogleLogin.setVisibility(View.GONE);
+        }
+        if (iconProfile != null) {
+            iconProfile.setVisibility(View.GONE);
+        }
         // --- KONIEC KODU DLA TOOLBARA ---
 
         progressTextView = findViewById(R.id.textViewProgress);
@@ -98,18 +107,29 @@ public class LearningActivity extends AppCompatActivity {
         });
     }
 
-    private void showCurrentCard() {
-        isFrontVisible = true;
-        cardFront.setRotationY(0);
-        cardBack.setRotationY(-180);
-        cardFront.setVisibility(View.VISIBLE);
-        cardBack.setVisibility(View.GONE);
+    // W pliku LearningActivity.java
 
+    private void showCurrentCard() {
+        // --- POCZĄTEK RESETOWANIA STANU ---
+        // Upewnij się, że zawsze zaczynamy od przodu
+        isFrontVisible = true;
+        // Resetujemy obroty i alfa na wszelki wypadek (choć visibility powinno wystarczyć)
+        cardFront.setRotationY(0);
+        cardFront.setAlpha(1.0f);
+        cardBack.setRotationY(0); // Można też użyć wartości startowej z animatora, np. -180
+        cardBack.setAlpha(1.0f); // Ustawiamy alfa na 1, visibility ukryje
+        // Ustawiamy poprawną widoczność
+        cardFront.setVisibility(View.VISIBLE); // Pokaż przód
+        cardBack.setVisibility(View.GONE);    // Ukryj tył
+        // --- KONIEC RESETOWANIA STANU ---
+
+        // Wczytaj dane nowej fiszki
         Flashcard card = currentCards.get(currentCardIndex);
         frontTextView.setText(card.getFront());
         backTextView.setText(card.getBack());
         progressTextView.setText((currentCardIndex + 1) + "/" + currentCards.size());
 
+        // Aktualizuj widoczność przycisków nawigacyjnych
         previousButton.setVisibility(currentCardIndex == 0 ? View.INVISIBLE : View.VISIBLE);
         nextButton.setVisibility(currentCardIndex == currentCards.size() - 1 ? View.INVISIBLE : View.VISIBLE);
     }
