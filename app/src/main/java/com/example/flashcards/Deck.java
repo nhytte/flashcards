@@ -3,6 +3,8 @@ package com.example.flashcards; // <-- ZMIEŃ NA NAZWĘ SWOJEGO PAKIETU
 import java.util.List;
 
 public class Deck {
+    private int dbId;
+
     private String title;
     private String description;
     private List<Flashcard> cards;
@@ -13,6 +15,8 @@ public class Deck {
         this.cards = cards;
     }
 
+    public void setDbId(int dbId) { this.dbId = dbId; }
+    public int getDbId() { return dbId; }
     public String getTitle() { return title; }
     public String getDescription() { return description; }
     public List<Flashcard> getCards() { return cards; }
