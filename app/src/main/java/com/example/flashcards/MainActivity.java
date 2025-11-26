@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private String userName = "Gość";
 
     // !!! ZASTĄP SWOIM KLUCZEM I URL !!!
-    private static final String SUPABASE_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmaGRuYmdmdXFjaG11bnBtaGV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5NjA0MzEsImV4cCI6MjA3NjUzNjQzMX0.fx6xY49V2hUG0msmo1pvGp9bnkDzKrBMs4iZT7_t8Zo";
+    private static final String SUPABASE_API_KEY = "YOUR_SUPABASE_API_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
