@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Konfiguracja Google Sign-In do wylogowania
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("428819652685-2n0rrvsr3bodtagmuljo7k7fi246rv3c.apps.googleusercontent.com") // !!! WAŻNE !!! Użyj tego samego ID co w MainActivity
+                .requestIdToken("YOUR_WEB_CLIENT_ID") // !!! WAŻNE !!! Użyj tego samego ID co w MainActivity
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
